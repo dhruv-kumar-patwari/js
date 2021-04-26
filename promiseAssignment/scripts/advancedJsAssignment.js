@@ -1,3 +1,7 @@
+
+/*The below code uses only promises to solve the question*/
+
+
 // function getData(uId) {
 //     return new Promise((resolve, reject)=>{
 //         try{
@@ -15,6 +19,9 @@
 // console.log("start");
 // getData("skc").then(email=>console.log("Email id of the user id is: " + email));
 // console.log("end");
+
+
+/*The below code uses async await to solve the question*/
 
 
 async function getData(uId) {
