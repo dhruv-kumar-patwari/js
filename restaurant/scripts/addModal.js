@@ -1,8 +1,13 @@
+
 const modalDiv = document.querySelector(".modals");
+
 const numberOfTables = document.querySelectorAll("#tables .table").length;
-console.log(numberOfTables)
+
+
 for(let i = 1; i <= numberOfTables; i++){
+
     let div = document.createElement('div');
+
     div.innerHTML = `
         <div id="my-modal-${i}" class="modal">
                 <div class="modal-content">
@@ -69,6 +74,7 @@ function closeModal() {
 // Close If Outside Click
 function outsideClick(e) {
   const modal = document.querySelector('#my-modal-' + tableNumber);
+  console.log(e)
   if (e.target == modal) {
     modal.style.display = 'none';
   }

@@ -28,6 +28,11 @@ const menuItems = [
         name:"Coke",
         price: 50,
         course:'beverage'
+    },
+    {
+        name:"Sprite",
+        price: 50,
+        course:'beverage'
     }
 ]
 
@@ -68,22 +73,27 @@ const menuItemsDiv = document.getElementById('menu-items');
 
 
 for (let menuItem of menuItems){
+    // Generate parent div for card
     const cardDiv = document.createElement('div');
     cardDiv.className ="card text-start menu"
     cardDiv.draggable = true;
 
+    // Add Card Header
     const cardHeader = document.createElement('div');
     cardHeader.className ="card-header"
     cardHeader.innerText = menuItem.name
     
+    // Add Card Body
     const cardBody = document.createElement('div');
     cardBody.className ="card-body"
     cardBody.innerText = `Rs. ${menuItem.price}`
 
+    // Adding Hidden Field for course type
     const courseTypeSection = document.createElement('div');
     courseTypeSection.className ="d-none course"
-    courseTypeSection.innerText = `Rs. ${menuItem.course}`
+    courseTypeSection.innerText = `${menuItem.course}`
 
+    // Adding child divs to parent div
     cardDiv.appendChild(cardHeader)
     cardBody.appendChild(courseTypeSection)
     cardDiv.appendChild(cardBody)

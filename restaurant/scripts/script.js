@@ -21,9 +21,6 @@ tables.forEach(table => {
     
   })
 
-  table.addEventListener('dragleave', e => {
-  })
-
   table.addEventListener('drop', e => {
     const draggable = document.querySelector('.dragging')
     const itemName = draggable.querySelector(".card-header").innerHTML.trim();

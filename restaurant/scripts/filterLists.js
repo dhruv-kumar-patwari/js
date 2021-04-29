@@ -22,8 +22,8 @@ function filterMenuItems(){
 function filterTableItems(){
     const searchVal = filterTable.value.toUpperCase();
 
-    const menuItems = document.getElementById('tables')
-    let listItems = menuItems.querySelectorAll(".table")
+    const tableNumbers = document.getElementById('tables')
+    let listItems = tableNumbers.querySelectorAll(".table")
 
     filterItems(searchVal, listItems)
 }
@@ -31,8 +31,9 @@ function filterTableItems(){
 
 function filterItems(searchVal, listItems){
     for(let i = 0; i < listItems.length; i++){
-        let value = listItems[i].querySelector(".card-header").innerHTML.trim();
+        let value = listItems[i].querySelector(".card-header").innerHTML;
         let courseVal = "";
+
         try{
             courseVal = listItems[i].querySelector(".course").innerHTML.trim();
         }catch(e){}
