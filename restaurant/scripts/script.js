@@ -1,3 +1,4 @@
+// Drag And drop feature added
 const menus = document.querySelectorAll('.menu');
 const tables = document.querySelectorAll('.table');
 
@@ -18,7 +19,6 @@ tables.forEach(table => {
 
   table.addEventListener('dragenter', e => {
     e.preventDefault()
-    
   })
 
   table.addEventListener('drop', e => {
@@ -30,7 +30,7 @@ tables.forEach(table => {
 })
 
 function addToBill(foodItem, table){
-
+  // Get Object corresponding to the food item
   var foodItemObj = menuItems.filter(obj => {
     return obj.name === foodItem
   })
@@ -76,17 +76,16 @@ function generateBillingTable(table){
     i++;
     tableBody.appendChild(tableRow)
     totalAmount += bill.quantity * bill.price;
-    totalQuantity += bill.quantity;
+    totalQuantity += parseInt(bill.quantity);
   }
-
-  addFooterRowWithTotal(totalAmount, table);
   
   tablesList[table-1].quantity = totalQuantity;
   tablesList[table-1].total = totalAmount;
 
+  addFooterRowWithTotal(totalAmount, table);
   updateTotalAndQuantityOnTheCard(table, totalAmount, totalQuantity);
-  dropItemFromTable()
-  updateTotalOnChangingQuantity()
+  setUpEventListenerForDeleteOptionInTable()
+  setUpEventListenerForQuantityUpdate()
 }
 
 function addFooterRowWithTotal(totalAmount, table) {
@@ -108,23 +107,28 @@ function updateTotalAndQuantityOnTheCard(table, totalAmount, totalQuantity) {
 }
 
 
-function updateTotalOnChangingQuantity(){
+function setUpEventListenerForQuantityUpdate(){
   const quantities = document.querySelectorAll(".quantity-amount");
+
   for(let quantityInput of quantities){
     quantityInput.addEventListener('input', (e)=>{
       let tableNumber = e.path[6].querySelector("#modal-header-text").innerText.substr(6)
-      
       let foodItemIndex = e.path[2].querySelectorAll('td')[0].innerText
-
-      let newQuantity = e.path[2].querySelectorAll('td')[2].querySelector(".quantity-amount").value
-
-      tablesList[tableNumber-1].bill[foodItemIndex-1].quantity = newQuantity;
-      generateBillingTable(tableNumber)
+      let updatedQuantity = e.path[2].querySelectorAll('td')[2].querySelector(".quantity-amount").value
+      if(updatedQuantity < 0){
+        alert("Cant't go below 0")
+        tablesList[tableNumber-1].bill[foodItemIndex-1].quantity = 0;
+        generateBillingTable(tableNumber)
+      }
+      else{
+        tablesList[tableNumber-1].bill[foodItemIndex-1].quantity = updatedQuantity;
+        generateBillingTable(tableNumber)
+      }
     })
   }
 }
 
-function dropItemFromTable(){
+function setUpEventListenerForDeleteOptionInTable(){
   const dropBtns = document.querySelectorAll('.drop');
 
   for(let dropBtn of dropBtns){

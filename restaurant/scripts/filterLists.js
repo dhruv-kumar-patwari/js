@@ -4,12 +4,11 @@ const filterTable = document.getElementById('table-search')
 
 //Add event listener to search bar
 
-filterMenu.addEventListener('keyup', filterMenuItems)
-filterTable.addEventListener('keyup', filterTableItems)
+filterMenu.addEventListener('keyup', setUpMenuFilter)
+filterTable.addEventListener('keyup', setUpTableFilter)
 
 
-
-function filterMenuItems(){
+function setUpMenuFilter(){
     const searchVal = filterMenu.value.toUpperCase();
 
     const menuItems = document.getElementById('menu-items')
@@ -19,7 +18,7 @@ function filterMenuItems(){
 }
 
 
-function filterTableItems(){
+function setUpTableFilter(){
     const searchVal = filterTable.value.toUpperCase();
 
     const tableNumbers = document.getElementById('tables')
